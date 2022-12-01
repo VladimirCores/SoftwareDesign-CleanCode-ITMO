@@ -30,6 +30,7 @@ const isTodoNotSelected = () => !isSelectedActive();
 const isActionButtonDisabled = computed(() => {
   return v$.value.inputText.$error || (isSelectedActive() && titleText.value === state.selected.title)
 })
+
 const onTodoListItemClicked = (todo) => {
   console.log('> onTodoListItemClicked', todo);
   const isSelected = isTodoSelected(todo);
