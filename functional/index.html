@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="/vite.svg" rel="icon" type="image/svg+xml" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link type="text/css" rel="stylesheet" href="public/overlay.css" />
+    <title>Todo App</title>
+    <style>
+      .delete-button {
+        display: none;
+        border-radius: 25%;
+        border: 1px solid gray;
+      }
+      .todo-item:hover > button.delete-button {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loader" class="loading"><div class="spinner"></div></div>
+    <div id="app" style="visibility: hidden">
+      <input id="inpTodoTitle" />
+      <button id="btnCreateTodo">Create</button>
+      <ol id="listOfTodos"></ol>
+    </div>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
