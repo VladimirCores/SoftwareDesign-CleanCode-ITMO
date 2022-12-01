@@ -9,6 +9,7 @@ const LOCAL_KEY_TODOS = 'todos'
 const LOCAL_KEY_TEXT = 'text'
 
 const getLocalText = () => localStorage.getItem(LOCAL_KEY_TEXT) || '';
+const getTodoIndex = (todo) => state.todos.indexOf(todo);
 
 const domBtnAction = ref(null);
 const titleText = ref(getLocalText());
@@ -23,7 +24,6 @@ const v$ = useVuelidate({
 
 const validate = () => v$.value.$validate();
 
-const getTodoIndex = (todo) => state.todos.indexOf(todo);
 const isTodoSelected = (todo) => state.selected === todo;
 const isSelectedActive = () => !!state.selected;
 const isTodoNotSelected = () => !isSelectedActive();
