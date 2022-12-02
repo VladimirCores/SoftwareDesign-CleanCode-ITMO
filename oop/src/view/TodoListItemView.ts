@@ -100,10 +100,9 @@ class TodoListItemView extends DomElement {
       const editData = new EditDTO(this.dom.id, editValue, '');
       console.log('> TodoListItemView -> _onInputEditKeyboardKey:', { editValue });
       (this.inpEdit as HTMLInputElement).disabled = true;
-      Wire.send(ViewSignals.EDIT, editData).then(() => {
-        (this.inpEdit as HTMLInputElement).disabled = false;
-        this._OnEditCancel();
-      });
+      Wire.send(ViewSignals.EDIT, editData)
+        .then(() => this._OnEditCancel())
+        .finally(() => (this.inpEdit as HTMLInputElement).disabled = false);
     } else if (key === 'Escape') this._OnEditCancel();
   }
   _OnWireDataValueChanged(todoVO: TodoVO) {
