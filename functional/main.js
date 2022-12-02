@@ -33,7 +33,6 @@ $(Dom.BTN_CREATE_TODO).addEventListener('click', onBtnCreateTodoClick);
 $(Dom.INPUT_TODO_TITLE).addEventListener('keyup', onInpTodoTitleKeyup);
 $(Dom.LIST_OF_TODOS).addEventListener('change', onTodoListChange);
 $(Dom.LIST_OF_TODOS).addEventListener('click', onTodoDomItemClicked);
-
 function initializeTodoListAndRender(todoList) {
   console.log('> initializeTodoList:', todoList);
   listOfTodos = todoList;
@@ -88,7 +87,6 @@ async function onTodoDomItemClicked(event) {
     checkDisable_CreateTodoButtonFromInput(clickedTodoVO.title);
   }
 }
-
 async function onTodoListChange(event) {
   console.log('> onTodoListChange -> event:', event);
   const target = event.target;
@@ -109,7 +107,6 @@ async function onTodoListChange(event) {
     TodoView.enableTodoListItem(todoView);
   }
 }
-
 async function onBtnCreateTodoClick() {
   const titleText = $(Dom.INPUT_TODO_TITLE).value;
   console.log('> onBtnCreateTodoClick:', { titleText });
@@ -119,7 +116,6 @@ async function onBtnCreateTodoClick() {
     await createUpdate_TodoWithTitleText(titleText);
   }
 }
-
 async function onInpTodoTitleKeyup(e) {
   const inputValue = $(Dom.INPUT_TODO_TITLE).value;
   console.log('> onInpTodoTitleKeyup:', inputValue);
@@ -140,7 +136,6 @@ function checkDisable_CreateTodoButtonFromInput(inputValue) {
     disableEnable_CreateTodoButtonOnTitleText();
   }
 }
-
 function render_TodoListInContainer() {
   console.log('> render_TodoListInContainer:', { listOfTodos });
   let output = '';
@@ -150,7 +145,6 @@ function render_TodoListInContainer() {
   }
   $(Dom.LIST_OF_TODOS).innerHTML = output;
 }
-
 function reset_SelectedTodo() {
   console.log('> resetSelectedTodo -> selectedTodoVO:', selectedTodoVO);
   $(Dom.BTN_CREATE_TODO).innerText = 'Create';
@@ -160,19 +154,16 @@ function reset_SelectedTodo() {
   selectedTodoViewItem = null;
   selectedTodoVO = null;
 }
-
 function clear_InputTextAndLocalStorage() {
   console.log('> clear_InputTextAndLocalStorage');
   $(Dom.INPUT_TODO_TITLE).value = '';
   localStorage.removeItem(LOCAL_INPUT_TEXT);
 }
-
 function disableEnable_CreateTodoButtonOnTitleText(validateInputMethod = isStringNotNumberAndNotEmpty) {
   const textToValidate = $(Dom.INPUT_TODO_TITLE).value;
   console.log('> disableEnable_CreateTodoButtonOnTodoInputTitle:', { textToValidate });
   disableButtonWhenTextInvalid($(Dom.BTN_CREATE_TODO), textToValidate, validateInputMethod);
 }
-
 function createUpdate_TodoWithTitleText(titleText) {
   $(Dom.BTN_CREATE_TODO).disabled = true;
   $(Dom.INPUT_TODO_TITLE).disabled = true;

@@ -9,11 +9,11 @@ class TodoDeleteCommand extends WireCommand<void> {
   }
 
   async execute() {
-    const todoWD = Wire.data(this._todoId);
-    const isTodoCompleted = todoWD.value.completed;
+    const todoWireData = Wire.data(this._todoId);
+    const isTodoCompleted = todoWireData.value.completed;
     console.log(`> TodoDeleteCommand -> execute: id = ${this._todoId}`);
 
-    todoWD
+    todoWireData
       .remove()
       .then(() => {
         const listOfTodoIds: Array<string> = Wire.data(DataKeys.LIST_OF_IDS).value;

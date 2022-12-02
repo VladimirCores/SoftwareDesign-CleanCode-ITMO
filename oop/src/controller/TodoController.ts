@@ -12,11 +12,12 @@ import EditDTO from '@/model/data/dto/EditDTO';
 import TodoInputCommand from './commands/todo/TodoInputCommand';
 import TodoToggleCommand from './commands/todo/TodoToggleCommand';
 import TodoEditCommand from './commands/todo/TodoEditCommand';
-
 import TodoDeleteCommand from './commands/todo/TodoDeleteCommand';
+
 import CompleteAllTodosCommand from './commands/operations/CompleteAllTodosCommand';
 import ClearCompletedTodosCommand from './commands/operations/ClearCompletedTodosCommand';
 import FilterTodosCommand from './commands/operations/FilterTodosCommand';
+
 import CountCompletedGetter from './getters/CountCompletedGetter';
 
 class TodoController {

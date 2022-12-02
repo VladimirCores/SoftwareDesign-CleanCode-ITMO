@@ -14,8 +14,8 @@ class FilterTodosCommand extends WireCommand<void> {
     console.log(`> ApplyFilterToTodosCommand -> filtered: ${this._filter}`);
     const listOfVisibleTodoIds = [];
     for (const todoId of listOfTodoIds) {
-      const todoWD = Wire.data(todoId);
-      const todoVO = todoWD.value;
+      const todoWireData = Wire.data(todoId);
+      const todoVO = todoWireData.value;
       let todoVisible = false;
       switch (this._filter) {
         case FilterValues.ALL:

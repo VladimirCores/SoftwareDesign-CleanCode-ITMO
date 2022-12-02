@@ -58,11 +58,11 @@ class TodoListItemView extends DomElement {
 
     this.wireDataListener = async (todoVO) => this._OnWireDataValueChanged(todoVO);
 
-    const todoWD = Wire.data(id) as IWireData;
-    todoWD.subscribe(this.wireDataListener);
+    const todoWireData = Wire.data(id) as IWireData;
+    todoWireData.subscribe(this.wireDataListener);
 
-    console.log(`> TodoListItemView(${id}) -> isSet = ${todoWD.isSet}`);
-    this._OnWireDataValueChanged(todoWD.value);
+    console.log(`> TodoListItemView(${id}) -> isSet = ${todoWireData.isSet}`);
+    this._OnWireDataValueChanged(todoWireData.value);
   }
   updateDom({ completed, text }: TodoVO) {
     console.log(`> TodoListItemView(${this.dom.id}) -> updateDom`, { text, completed });
@@ -73,10 +73,10 @@ class TodoListItemView extends DomElement {
     this.inpEdit.selectionStart = text.length;
   }
   cleanup() {
-    const todoWD = Wire.data(this.dom.id);
-    const hasWireDataListener = todoWD.hasListener(this.wireDataListener);
+    const todoWireData = Wire.data(this.dom.id);
+    const hasWireDataListener = todoWireData.hasListener(this.wireDataListener);
     console.log(`> TodoListItemView(${this.dom.id}) -> cleanup`, { hasWireDataListener });
-    todoWD.unsubscribe(this.wireDataListener);
+    todoWireData.unsubscribe(this.wireDataListener);
     this.inpToggle.onclick = null;
     this.btnDelete.onclick = null;
     this.inpEdit.onkeydown = null;
