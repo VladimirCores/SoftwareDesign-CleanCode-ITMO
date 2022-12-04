@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { onMounted, reactive, watch, computed, ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
-import { alpha, helpers, minLength, required, and, or } from '@vuelidate/validators';
+import {
+  alpha,
+  helpers,
+  minLength,
+  required,
+  and,
+  or,
+} from '@vuelidate/validators';
 import TodoVO from '@/model/vos/TodoVO';
 import Spinner from '@/components/Spinner.vue';
 import type { ITodoVO } from '@/model/vos/TodoVO';
@@ -23,7 +30,7 @@ const titleText = ref(getLocalText());
 const state: State = reactive({
   todos: JSON.parse(localStorage.getItem(LOCAL_KEY_TODOS) as string) || [],
   selected: null,
-  isLoading: false
+  isLoading: false,
 });
 
 const cyrilicValidator = helpers.regex(/^[А-Яа-яёЁ]+$/i);
@@ -42,7 +49,10 @@ const isTodoSelected = (todo: ITodoVO) => state.selected === todo;
 const isSelectedActive = () => !!state.selected;
 const isTodoNotSelected = () => !isSelectedActive();
 const isActionButtonDisabled = computed(() => {
-  return validator.value.titleText.$error || (isSelectedActive() && titleText.value === state.selected.title);
+  return (
+    validator.value.titleText.$error ||
+    (isSelectedActive() && titleText.value === state.selected?.title)
+  );
 });
 
 const onTodoListItemClicked = (todo: ITodoVO) => {
@@ -50,19 +60,21 @@ const onTodoListItemClicked = (todo: ITodoVO) => {
   const isSelected = isTodoSelected(todo);
   state.selected = isSelected ? null : todo;
   titleText.value = isSelected ? getLocalText() : todo.title;
-  (domBtnAction.value! as HTMLElement).innerText = isSelected ? 'Create' : 'Update';
+  (domBtnAction.value! as HTMLElement).innerText = isSelected
+    ? 'Create'
+    : 'Update';
 };
 const onDeleteTodo = (todo: ITodoVO) => {
   console.log('> onTodoListItemClicked', todo);
   if (isTodoSelected(todo)) onTodoListItemClicked(todo);
   state.todos.splice(getTodoIndex(todo), 1);
-}
+};
 const onCreateButtonClick = () => {
   console.log('> onCreateButtonClick', state);
   if (isSelectedActive()) {
     (state.selected! as ITodoVO).title = titleText.value;
-    state.todos.splice(getTodoIndex(state.selected), 1, state.selected!);
-    onTodoListItemClicked(state.selected);
+    state.todos.splice(getTodoIndex(state.selected!), 1, state.selected!);
+    onTodoListItemClicked(state.selected!);
   } else {
     state.todos.push(TodoVO.createFromTitle(titleText.value));
     titleText.value = '';
@@ -70,8 +82,13 @@ const onCreateButtonClick = () => {
   validate();
 };
 
-watch(state.todos, (value) => localStorage.setItem(LOCAL_KEY_TODOS, JSON.stringify(value)));
-watch(titleText, (value) => isTodoNotSelected() && localStorage.setItem(LOCAL_KEY_TEXT, value));
+watch(state.todos, (value) =>
+  localStorage.setItem(LOCAL_KEY_TODOS, JSON.stringify(value)),
+);
+watch(
+  titleText,
+  (value) => isTodoNotSelected() && localStorage.setItem(LOCAL_KEY_TEXT, value),
+);
 onMounted(
   () => (
     validate(),
@@ -82,10 +99,20 @@ onMounted(
 );
 </script>
 <template>
-  <Spinner v-if="state.isLoading"/>
+  <Spinner v-if="state.isLoading" />
   <main v-else>
-    <input v-model="titleText" @keyup.enter="onCreateButtonClick" @keyup="validate"/>
-    <button ref="domBtnAction" @click="onCreateButtonClick" :disabled="isActionButtonDisabled">Create</button>
+    <input
+      v-model="titleText"
+      @keyup.enter="onCreateButtonClick"
+      @keyup="validate"
+    />
+    <button
+      ref="domBtnAction"
+      @click="onCreateButtonClick"
+      :disabled="isActionButtonDisabled"
+    >
+      Create
+    </button>
     <ol>
       <li
         v-for="todo in state.todos"
@@ -127,5 +154,4 @@ li {
     }
   }
 }
-
 </style>
