@@ -26,8 +26,13 @@ wrapDevOnlyConsoleLog();
 todoServerService
   .requestTodos()
   .then(initializeTodoListAndRender)
-  .catch((error) => ($(Dom.APP).innerHTML = ErrorView.createTodoListRetrieveError(error)))
-  .finally(() => ($(Dom.APP).style.visibility = 'visible'));
+  .catch((error) => {
+    $(Dom.APP).innerHTML = ErrorView.createTodoListRetrieveError(error);
+  })
+  .finally(() => {
+    $(Dom.APP).style.visibility = 'visible';
+    $(Dom.LOADER_SPINNER).remove();
+  });
 
 $(Dom.BTN_CREATE_TODO).addEventListener('click', onBtnCreateTodoClick);
 $(Dom.INPUT_TODO_TITLE).addEventListener('keyup', onInpTodoTitleKeyup);
@@ -36,7 +41,6 @@ $(Dom.LIST_OF_TODOS).addEventListener('click', onTodoDomItemClicked);
 function initializeTodoListAndRender(todoList) {
   console.log('> initializeTodoList:', todoList);
   listOfTodos = todoList;
-  $(Dom.LOADER_SPINNER).remove();
   $(Dom.INPUT_TODO_TITLE).value = localStorage.getItem(LOCAL_INPUT_TEXT);
   disableEnable_CreateTodoButtonOnTitleText();
   render_TodoListInContainer();
