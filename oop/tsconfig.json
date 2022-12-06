@@ -1,22 +1,16 @@
 {
-  "outDir": "dist",
-  "types": [
-    "chrome",
-    "node"
-  ],
   "compilerOptions": {
+    "target": "ESNext",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["vite/client", "node"],
-    "allowJs": true,
-    "target": "esnext",
-    "module": "esnext",
-    "lib": ["esnext", "dom"],
-    "moduleResolution": "node",
-    "strict": true,
+    "types": ["vite/client", "cores.wire/dist/"],
     "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "Node",
+    "strict": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
@@ -25,7 +19,8 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
+    "allowJs": true
   },
   "exclude": ["node_modules"],
-  "include": ["src", "cypress", "tests", "main.ts", "cypress.config.ts", "vitest.config.ts"]
+  "include": ["src", "tests"]
 }

@@ -1,6 +1,7 @@
 {
   "root": true,
   "env": {
+    "es6": true,
     "node": true,
     "es2021": true,
     "browser": true
@@ -26,30 +27,26 @@
   ],
   "settings": {
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts"]
+      "@typescript-eslint/parser": [".ts", ".js"]
     },
     "import/resolver": {
-      "typescript": {},
+      "typescript": {
+        "paths": "./tsconfig.json",
+        "alwaysTryTypes": true
+      },
       "alias": {
         "map": [
           ["@", "./src"]
         ],
-        "extensions": [".ts"]
+        "extensions": [".ts", ".js"]
       }
     }
   },
   "rules": {
-    "import/named": 0,
-    "import/default": 0,
-    "import/namespace": 0,
-    "import/no-unresolved": 0,
-    "import/no-duplicates": 0,
-    "import/no-named-as-default": 0,
-    "import/no-named-as-default-member": 0,
     "prettier/prettier": "error",
-    "@typescript-eslint/no-non-null-assertion": 0,
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/no-explicit-any": 0
+    "node/no-missing-require": "off",
+    "node/no-extraneous-require": "off",
+    "node/no-extraneous-import": "off",
+    "@typescript-eslint/no-non-null-assertion": 0
   }
 }
