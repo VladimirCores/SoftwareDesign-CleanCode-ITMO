@@ -102,7 +102,7 @@ class TodoListItemView extends DomElement {
       (this.inpEdit as HTMLInputElement).disabled = true;
       Wire.send(ViewSignals.EDIT, editData)
         .then(() => this._OnEditCancel())
-        .finally(() => (this.inpEdit as HTMLInputElement).disabled = false);
+        .finally(() => ((this.inpEdit as HTMLInputElement).disabled = false));
     } else if (key === 'Escape') this._OnEditCancel();
   }
   _OnWireDataValueChanged(todoVO: TodoVO) {
