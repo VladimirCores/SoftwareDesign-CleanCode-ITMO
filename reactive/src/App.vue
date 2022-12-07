@@ -121,7 +121,7 @@ onMounted(
         :key="todo.id"
       >
         {{ todo.title }}
-        <button @click.once="onDeleteTodo(todo)" class="delete">x</button>
+        <button @click="onDeleteTodo(todo)" class="delete">x</button>
       </li>
     </ol>
   </main>
